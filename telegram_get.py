@@ -1,9 +1,10 @@
+import token_id
 import telegram
 import logging
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-token = '1587350378:AAEIN5mL4SjXP3PUul0c_61-nNzYvp9X58I'
+token = token_id.token
 
 bot = telegram.Bot(token=token)
 print(bot.get_me())
@@ -19,7 +20,7 @@ logger = logging.getLogger(__name__)
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update: Update, context: CallbackContext) -> None:
-    """Send a message when the command /start is issued."""
+    """Send a message when the command/start is issued."""
     update.message.reply_text('Hi!')
 
 
@@ -28,29 +29,21 @@ def help_command(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Do you need help?')
 
 
-def echo(update: Update, context: CallbackContext) -> None:
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
+def file_handler(Update, context: CallbackContext):
+    file = context.bot.getFile(Update.message.document.file_id)
+    print("file_id: " + str(Update.message.document.file_id))
+    file.download('document.csv')
 
 
 def main():
     """Start the bot."""
-    # Create the Updater and pass it your bot's token.
-    # Make sure to set use_context=True to use the new context based callbacks
-    # Post version 12 this will no longer be necessary
     updater = Updater(token, use_context=True)
-
-    # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
 
-    # on different commands - answer in Telegram
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("help", help_command))
+    dispatcher.add_handler(MessageHandler(Filters.document, file_handler))
 
-    # on noncommand i.e message - echo the message on Telegram
-    dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
-
-    # Start the Bot
     updater.start_polling()
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
