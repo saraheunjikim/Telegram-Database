@@ -18,11 +18,12 @@ def categorize_files(files):
     for file in files:
         with open(file, mode='r', encoding='utf8') as f:
             text = f.readline().split(",")
-            if 'Job ID' in text[0]:
-                move_files(file, 'jobs/')
-                print("This is a job related file")
-            else:
-                print("no")
+        if 'Job ID' in text[0]:
+            move_files(file, 'jobs/')
+            f.close()
+            print("This is a job related file")
+        else:
+            print("no")
 
     return True
 
