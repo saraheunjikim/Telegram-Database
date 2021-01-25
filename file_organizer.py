@@ -1,4 +1,3 @@
-import os
 from os import listdir
 import shutil
 
@@ -30,9 +29,4 @@ def categorize_files(files):
 
 # Move files
 def move_files(file_name, category):
-    print(file_name)
-    print(category)
     return shutil.move(source_dir + file_name, destination_dir + category + file_name)
-
-
-categorize_files(files)

@@ -10,9 +10,7 @@ bot = telegram.Bot(token=token)
 print(bot.get_me())
 
 # Enable logging
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +27,6 @@ def file_handler(Update, context: CallbackContext):
     file = context.bot.getFile(Update.message.document.file_id)
     print("file_id: " + str(Update.message.document.file_id))
     file.download()
-
     # Call file_organizer.py and organize files into sub folder based on its usage.
 
 
