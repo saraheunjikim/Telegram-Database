@@ -3,7 +3,6 @@ import shutil
 
 source_dir = 'C:/Users/Muffin/Desktop/python/projects/Telegram-Database/'
 destination_dir = 'C:/Users/Muffin/Desktop/python/projects/Telegram-Database/files/'
-files = [file for file in listdir(source_dir) if file.endswith('csv')]
 
 
 # Get all file names in the directory
