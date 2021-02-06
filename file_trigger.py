@@ -7,6 +7,7 @@ path_folder_jobs = "C:/Users/Muffin/Desktop/python/projects/Telegram-Database/fi
 path_folder_corona = "C:/Users/Muffin/Desktop/python/projects/Telegram-Database/files/corona"
 path_folder_etc = "C:/Users/Muffin/Desktop/python/projects/Telegram-Database/files/etc"
 
+
 def on_created(event):
     print(f"{event.src_path} has been created.")
 
@@ -31,6 +32,7 @@ def trigger_files(path):
     except KeyboardInterrupt:
         my_observer.stop()
         my_observer.join()
+
 
 if __name__ == '__main__':
     trigger_files(path_folder)
