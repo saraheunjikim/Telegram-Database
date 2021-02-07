@@ -1,4 +1,5 @@
 import token_id
+import file_organizer
 import telegram
 import logging
 from telegram import Update
@@ -25,6 +26,9 @@ def file_handler(Update, context: CallbackContext):
     file = context.bot.getFile(Update.message.document.file_id)
     print("file_id: " + str(Update.message.document.file_id))
     file.download()
+
+    files = file_organizer.file_names()
+    file_organizer.categorize_files(files)
 
 
 def execute_chat():
