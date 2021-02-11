@@ -1,5 +1,6 @@
 import token_id
 import file_organizer
+import upload_to_s3
 import telegram
 import logging
 from telegram import Update
@@ -29,6 +30,8 @@ def file_handler(Update, context: CallbackContext):
 
     files = file_organizer.file_names()
     file_organizer.categorize_files(files)
+
+    upload_to_s3.upload_s3()
 
 
 def execute_chat():
